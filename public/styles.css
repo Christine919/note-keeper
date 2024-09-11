@@ -7,12 +7,18 @@
 
 html {
   font-family: "Montserrat", sans-serif;
+  /* Prevent zooming on input focus */
+  -webkit-text-size-adjust: 100%; /* For WebKit browsers */
 }
 
 body {
   background: #eee;
   background-image: url("https://www.transparenttextures.com/patterns/cubes.png");
   padding: 0;
+  margin: 0;
+  min-height: 100vh; /* Ensures the body takes at least the full viewport height */
+  display: flex;
+  flex-direction: column;
 }
 
 /* Header styling */
@@ -35,11 +41,11 @@ header h1 {
 
 /* Footer styling */
 footer {
-  position: absolute;
+  position: relative; /* Change from absolute to relative */
   text-align: center;
-  bottom: 0;
   width: 100%;
   height: 2.5rem;
+  margin-top: auto; /* Pushes the footer to the bottom */
 }
 
 footer p {
@@ -143,6 +149,12 @@ form.create-note button {
     height: 32px;
     right: 12px;
     bottom: -12px;
+  }
+  
+  /* Adjust input sizes to prevent zooming */
+  form.create-note input,
+  form.create-note textarea {
+    font-size: 1em; /* Adjust font size to prevent zooming */
   }
 }
 
