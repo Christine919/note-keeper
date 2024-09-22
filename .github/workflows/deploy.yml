@@ -5,6 +5,9 @@ on:
     branches:
       - master  # The branch you want to deploy from
 
+permissions:
+  contents: write  # Allow write access to repository contents
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -16,17 +19,17 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '16'  # Specify the Node.js version you need
+          node-version: '16'
 
       - name: Install dependencies
-        run: npm install  # Install your project dependencies
+        run: npm install
 
       - name: Build the project
-        run: npm run build  # Build your project (if applicable)
+        run: npm run build  # Adjust if needed
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build  # Adjust if your build output is in a different directory
-          publish_branch: gh-pages  # Specify the branch to publish to
+          github_token: ${{ secrets.GITHUB_TOKEN }}  # Automatically provided by GitHub Actions
+          publish_dir: ./build  # Adjust based on your output directory
+          publish_branch: gh-pages
