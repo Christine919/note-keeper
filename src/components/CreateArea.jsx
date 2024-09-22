@@ -1,15 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import AddIcon from "@mui/icons-material/Add";
 import Fab from "@mui/material/Fab";
 import Zoom from "@mui/material/Zoom";
 
 function CreateArea(props) {
   const [isExpanded, setExpanded] = useState(false);
-
   const [note, setNote] = useState({
     title: "",
     content: ""
   });
+
+  useEffect(() => {
+    // If editing, set note to current note details
+    if (props.note.id !== null) {
+      setNote(props.note);
+    } else {
+      setNote({ title: "", content: "" }); // Reset for new note
+    }
+  }, [props.note]);
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -23,12 +31,12 @@ function CreateArea(props) {
   }
 
   function submitNote(event) {
-    props.onAdd(note);
+    event.preventDefault();
+    props.onAdd(note); // Add or update note based on parent logic
     setNote({
       title: "",
       content: ""
     });
-    event.preventDefault();
   }
 
   function expand() {
@@ -37,7 +45,7 @@ function CreateArea(props) {
 
   return (
     <div>
-      <form className="create-note">
+      <form className="create-note" onSubmit={submitNote}>
         {isExpanded && (
           <input
             name="title"
@@ -56,7 +64,7 @@ function CreateArea(props) {
           rows={isExpanded ? 3 : 1}
         />
         <Zoom in={isExpanded}>
-          <Fab onClick={submitNote}>
+          <Fab type="submit">
             <AddIcon />
           </Fab>
         </Zoom>
