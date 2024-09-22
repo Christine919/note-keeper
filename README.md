@@ -20,7 +20,7 @@ A simple note-keeping app built using React and Material-UI. This app allows use
 
 ## Demo
 
-You can view a demo of the project [here](#).
+You can view a demo of the project [here](https://christine919.github.io/note-keeper/).
 
 ## Installation
 
